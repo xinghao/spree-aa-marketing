@@ -1,0 +1,38 @@
+<%= render :partial => 'spree/admin/marketing_share/marketing_sub_menu' %>
+
+<div class="toolbar" data-hook="toolbar">
+  <ul class="actions">
+    <li id="new_marketing_compaign_link">
+      <%= button_link_to "New Landing Page", "/admin/landing_pages/new" %>
+    </li>
+  </ul>
+  <br class="clear" />
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<table class="index">
+  <tr>
+    <th>Id</th>
+    <th>Relative URL</th>
+    <th>Description</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th>Action</th>    
+  </tr>
+  <%@objects.each do |object|%>
+    <tr>
+      <td><%=object.id%></td>
+      <td><%=object.relative_url%></td>
+      <td><%=object.description%></td>
+      <td><%=object.created_at%></td>
+      <td><%=object.updated_at%></td>
+      <td><%=link_to "Edit", "/admin/landing_pages/#{object.id}/edit", :class => 'edit'%>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to "Delete", "/admin/landing_pages/#{object.id}/delete", :class => 'delete'%></td>
+    </tr>  
+  <% end %>
+</table>
+<br/>
+
+
