@@ -1,0 +1,9 @@
+
+
+  <%= f.field_container :name do %>
+    <%= f.label :name, t(:name) %> <span class="required">*</span><br />
+    <%= f.text_field :name, :class => 'name' %>
+    <%= f.error_message_on :name %>
+  <% end %>
+
+  <br/>

@@ -1,0 +1,10 @@
+<%= render :partial => 'marketing_share/marketing_sub_menu' %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
+
+<%= form_for [:admin, @object], :html => { :multipart => true } do |f| %>
+<fieldset data-hook="new_<%=@object.class.name%>">
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <%= button t('actions.create') %>
+</fieldset>  
+<% end %>

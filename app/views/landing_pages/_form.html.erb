@@ -1,0 +1,14 @@
+
+
+  <%= f.field_container :relative_url do %>
+    <%= f.label :relative_url, t(:relative_url) %> <span class="required">*</span><br />
+    <%= f.text_field :relative_url, :class => 'name' %>
+    <%= f.error_message_on :relative_url %>
+  <% end %>
+  <%= f.field_container :description do %>
+    <%= f.label :description, t(:description) %><br />
+    <%= f.text_field :description, :class => 'name' %>
+    <%= f.error_message_on :description %>
+  <% end %>
+
+  <br/>

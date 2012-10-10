@@ -1,0 +1,42 @@
+<%= render :partial => 'marketing_share/marketing_sub_menu' %>
+
+<div class="toolbar" data-hook="toolbar">
+  <br class="clear" />
+</div>
+
+<br/>
+<br/>
+<br/>
+
+
+<table class="index">
+  <tr>
+    <th>Id</th>
+    <th>Order Number</th>
+    <th>User Email</th>
+    <th>Campaign Name</th>
+    <th>Landing Page</th>
+    <th>Keyword</th>
+    <th>Creative</th>
+    <th>Referrer</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+  </tr>
+  <%@objects.each do |object|%>
+    <tr>
+      <td><%=object.id%></td>
+      <td><%= link_to object.order.number, admin_order_path(object.order)  if !object.order.nil?%></td>
+      <td><%=object.user.email if !object.user.nil?%></td>
+      <td><%=object.marketing_campaign.title if !object.marketing_campaign.nil?%></td>
+      <td><%=object.landing_page.relative_url if !object.landing_page.nil?%></td>
+      <td><%=object.keyword%></td>
+      <td><%=object.creative.name if !object.creative.nil?%></td>
+      <td><%=object.referrer_url%></td>
+      <td><%=object.created_at%></td>
+      <td><%=object.updated_at%></td>
+    </tr>  
+  <% end %>
+</table>
+<br/>
+
+

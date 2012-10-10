@@ -1,0 +1,9 @@
+<% content_for :sub_menu do %>
+  <ul id="sub_nav" data-hook="admin_marketing_sub_tabs">
+    <%= tab :marketing_compaigns, :url => "/admin/marketing_campaigns", :match_path => '/marketing_campaigns' %>
+    <%= tab :landing_pages, :url => "/admin/landing_pages", :match_path => '/landing_pages' %>
+    <%= tab :networks, :url => "/admin/networks", :match_path => '/networks' %>
+    <%= tab :creatives, :url => "/admin/creatives", :match_path => '/creatives' %>
+    <%= tab :traffic_sources, :url => "/admin/traffic_sources", :match_path => '/traffic_sources' %>
+  </ul>
+<% end %>
