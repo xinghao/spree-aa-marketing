@@ -1,5 +1,6 @@
 <% content_for :sub_menu do %>
   <ul id="sub_nav" data-hook="admin_marketing_sub_tabs">
+    <%= tab :reports, :url => "/admin/marketing/reports", :match_path => '/marketing/reports' %>  
     <%= tab :marketing_compaigns, :url => "/admin/marketing_campaigns", :match_path => '/marketing_campaigns' %>
     <%= tab :landing_pages, :url => "/admin/landing_pages", :match_path => '/landing_pages' %>
     <%= tab :networks, :url => "/admin/networks", :match_path => '/networks' %>

@@ -1,0 +1,52 @@
+<%= render :partial => 'spree/admin/marketing_share/marketing_sub_menu' %>
+
+<div class="toolbar" data-hook="toolbar">
+  <ul class="actions">
+    <li id="new_marketing_compaign_link">
+      <%= button_link_to "export_to_csv", "/admin/marketing/reports/csv" %>
+    </li>
+  </ul>
+  <br class="clear" />
+</div>
+
+<br/>
+<br/>
+<br/>
+<%@networks.each do |network|%>
+<h4><%=network.name%>: <%=network.id%></h4>
+<% if !@reports[network.id].nil?%>
+<table class="index">
+  <tr>
+    <th>Marketing Campaign/Landing Page</th>
+    <th>Leads</th>
+    <th colspan=<%=@preview_count%>>Orders</th>
+  </tr>  
+  <%@reports[network.id].hash.each_pair do |key, campaign_entry|%>
+    <tr>
+      <td rowspan=1><b><%=(MarketingCampaign.find(campaign_entry.id)).title%></b></td>
+      <td rowspan=1><b><%=campaign_entry.leads%></b></td>
+      <td rowspan=1 colspan=<%=@preview_count%>></td>
+    </tr>  
+    <% if !campaign_entry.hash.nil? %>
+      <%campaign_entry.hash.each_pair do |key, landing_page_entry|%>
+        <tr>
+          <% 
+            if has_variant_purchase?(landing_page_entry)
+              rowspan = 2
+            else
+              rowspan = 1
+            end
+          %>
+          <td rowspan=<%=rowspan%>><%=(LandingPage.find(landing_page_entry.id)).relative_url%></td>
+          <td rowspan=<%=rowspan%>><%=landing_page_entry.leads%></td>
+          <%=print_landing_page_variants(landing_page_entry, @preview_count)%>          
+        </tr> 
+      <% end %>     
+    <% end %>
+  <% end %>
+</table>
+<%end%>
+<br/>
+<%end%>
+
+

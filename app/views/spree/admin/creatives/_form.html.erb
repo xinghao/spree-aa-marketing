@@ -1,9 +1,9 @@
 
 
-  <%= f.field_container :name do %>
-    <%= f.label :name, t(:name) %> <span class="required">*</span><br />
-    <%= f.text_field :name, :class => 'name' %>
-    <%= f.error_message_on :name %>
+  <%= f.field_container :external_id do %>
+    <%= f.label :external_id, t(:external_id) %> <span class="required">*</span><br />
+    <%= f.text_field :external_id, :class => 'name' %>
+    <%= f.error_message_on :external_id %>
   <% end %>
 
   <br/>

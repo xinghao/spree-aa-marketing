@@ -1,6 +1,7 @@
 Spree::Core::Engine.routes.draw do
 
-
+  match 'admin/marketing/reports' => 'Admin::MarketingReports#index'
+    
   namespace :admin do  
     resources :traffic_sources do
       member do

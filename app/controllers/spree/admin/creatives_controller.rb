@@ -7,7 +7,7 @@ module Spree
       end
       
       def load_object()
-        @object.name = params[object_name]["name"]     
+        @object.external_id = params[object_name]["external_id"]     
       end
       
       

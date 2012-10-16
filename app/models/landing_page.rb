@@ -19,7 +19,7 @@ class LandingPage < ActiveRecord::Base
     if lp.nil?
       lp = LandingPage.new
       lp.relative_url = relative_uri
-      lp.description =  relative_uri + "[Auto created]"
+      lp.description =  relative_uri + " [Auto created]"
       lp.save
     end
     return lp

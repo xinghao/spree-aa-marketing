@@ -18,6 +18,7 @@
     <th>Campaign Name</th>
     <th>Landing Page</th>
     <th>Keyword</th>
+    <th>Match Type</th>
     <th>Creative</th>
     <th>Referrer</th>
     <th>Created at</th>
@@ -31,7 +32,8 @@
       <td><%=object.marketing_campaign.title if !object.marketing_campaign.nil?%></td>
       <td><%=object.landing_page.relative_url if !object.landing_page.nil?%></td>
       <td><%=object.keyword%></td>
-      <td><%=object.creative.name if !object.creative.nil?%></td>
+      <td><%=object.match_type%></td>
+      <td><%=object.creative.external_id if !object.creative.nil?%></td>
       <td><%=object.referrer_url%></td>
       <td><%=object.created_at%></td>
       <td><%=object.updated_at%></td>
