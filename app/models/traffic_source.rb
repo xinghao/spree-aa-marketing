@@ -99,19 +99,19 @@ class TrafficSource < ActiveRecord::Base
   end
   
 
-  def self.report_overview_data()
+  def self.report_overview_data(start_from, end_to)
     
     ret_hash = Hash.new
                                 
     #@reports[network.id] = TrafficSource.select("count(traffic_sources.id) as leads, spree_inventory_units.variant_id as variant_id, count(spree_inventory_units.id) as product_amount").joins({:order => :inventory_units}, :landing_page).group("landing_page_id, spree_inventory_units.variant_id")
-    details = TrafficSource.select("network_id, marketing_campaign_id, landing_page_id, variant_id, count(traffic_sources.id) as orders_amount, count(spree_inventory_units.id) as product_amount").joins(:inventory_units, :landing_page, :marketing_campaign).group("network_id, marketing_campaign_id, landing_page_id, spree_inventory_units.variant_id")
-    leads = TrafficSource.select("network_id, marketing_campaign_id, landing_page_id, count(traffic_sources.id) as leads").joins(:marketing_campaign).group("network_id, marketing_campaign_id, landing_page_id")
+    details = TrafficSource.select("network_id, marketing_campaign_id, landing_page_id, variant_id, count(traffic_sources.id) as orders_amount, count(spree_inventory_units.id) as product_amount").joins(:inventory_units, :landing_page, :marketing_campaign).where("traffic_sources.updated_at >= ? and traffic_sources.updated_at < ?", start_from, end_to + 1.day).group("network_id, marketing_campaign_id, landing_page_id, spree_inventory_units.variant_id")
+    leads = TrafficSource.select("network_id, marketing_campaign_id, landing_page_id, count(traffic_sources.id) as leads").joins(:marketing_campaign).where("traffic_sources.updated_at >= ? and traffic_sources.updated_at < ?", start_from, end_to + 1.day).group("network_id, marketing_campaign_id, landing_page_id")
     
-    Rails.logger.info("1NMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+    #Rails.logger.info("1NMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
     
     # generate leads
     leads.each do |lead| 
-      Rails.logger.info("NMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN: #{lead.network_id}")
+      #Rails.logger.info("NMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN: #{lead.network_id}")
       ret_hash = build_report_overview_structure(ret_hash, lead)
       ret_hash[lead.network_id.to_i].hash[lead.marketing_campaign_id.to_i].hash[lead.landing_page_id.to_i].leads = lead.leads
     end  
