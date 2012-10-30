@@ -23,7 +23,7 @@ class TrafficSource < ActiveRecord::Base
       ts = new_traffic_source(cookies, order.user.id, env)
     end
     
-    ts.order = order
+    ts.order_id = order.id
     ts.save
     return ts
     
@@ -55,6 +55,11 @@ class TrafficSource < ActiveRecord::Base
     
     if !cookies[TrafficSource::KEYWORD].to_s.blank?
       ts.keyword = cookies[TrafficSource::KEYWORD].to_s
+      
+      if !ts.keyword.blank? && ts.keyword.size > 255
+        ts.keyword = ts.keyword.truncate(250) + "..."
+      end
+      
     end
     
     if !cookies[TrafficSource::MATCH_TYPE].to_s.blank?
@@ -67,6 +72,11 @@ class TrafficSource < ActiveRecord::Base
     elsif (env['HTTP_REFERER'])
       ts.referrer_url = env['HTTP_REFERER']
     end      
+    
+    if !ts.referrer_url.blank? && ts.referrer_url.size > 255
+      ts.referrer_url = ts.referrer_url.truncate(250) + "..."
+    end
+    
     
     ts.save
     return ts    

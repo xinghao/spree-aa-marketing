@@ -13,6 +13,9 @@ class Creative < ActiveRecord::Base
     if creative.nil?
       creative = Creative.new
       creative.external_id =  external_id + " [Auto created]"
+      if creative.external_id.size > 255
+        creative.external_id = creative.external_id.truncate(250) + "..."
+      end
       creative.save
     end
     
