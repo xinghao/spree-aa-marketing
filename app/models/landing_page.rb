@@ -17,7 +17,8 @@ class LandingPage < ActiveRecord::Base
     end
     if relative_uri.blank? || relative_uri.downcase == '/featured' 
       product = Spree::ProductGroup.getFeaturedProduct();
-      relative_uri = "[Featured] /products/#{product.permalink}"
+      relative_uri = "[home page]"
+      relative_uri = "[Featured] /products/#{product.permalink}" if !product.blank?
     end
     
     if !relative_uri.blank? && relative_uri.size > 255
